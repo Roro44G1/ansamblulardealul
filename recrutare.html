@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recrutare — Alătură-te Ansamblului „Ardealul"</title>
+<meta name="description" content="Vrei să înveți jocul popular din Ardeal? Înscrie-te la selecțiile Ansamblului Folcloric Studențesc „Ardealul", Sibiu — dans, canto popular sau instrumente tradiționale.">
+<link rel="canonical" href="https://ansamblulardealul.ro/recrutare.html">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Sari la conținut</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">Ardealul</span>
+      <span class="brand__tag">Casa de Cultură a Studenților Sibiu</span>
+    </a>
+    <nav class="nav" aria-label="Navigare principală">
+      <a href="despre.html">Despre noi</a>
+      <a href="repertoriu.html">Repertoriu</a>
+      <a href="formatie.html">Formație</a>
+      <a href="evenimente.html">Evenimente</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-ctas">
+      <a href="servicii.html" class="btn btn-ghost-ink">Angajează ansamblul</a>
+      <a href="recrutare.html" class="btn btn-gold" aria-current="page">Alătură-te</a>
+    </div>
+    <button class="nav-toggle" data-nav-toggle aria-label="Deschide meniul" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav" data-mobile-nav>
+  <a href="despre.html">Despre noi</a>
+  <a href="repertoriu.html">Repertoriu</a>
+  <a href="formatie.html">Formație</a>
+  <a href="evenimente.html">Evenimente</a>
+  <a href="galerie.html">Galerie</a>
+  <a href="presa.html">Presă</a>
+  <a href="parteneri.html">Parteneri</a>
+  <a href="contact.html">Contact</a>
+  <div class="header-ctas">
+    <a href="servicii.html" class="btn btn-ghost-ink btn-block">Angajează ansamblul</a>
+    <a href="recrutare.html" class="btn btn-gold btn-block" aria-current="page">Alătură-te</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- HERO SCURT -->
+  <section class="hero hero--page on-ink" style="padding-block: var(--sp-7) var(--sp-6);">
+    <div class="container">
+      <div class="hero__inner">
+        <p class="eyebrow hero__kicker">Recrutare</p>
+        <h1 class="hero__title">Hai în „Ardealul"!</h1>
+        <p class="lede">Nu ai nevoie de experiență de scenă — ai nevoie de dorința de a învăța. Completează formularul de mai jos și te contactăm pentru selecții.</p>
+      </div>
+    </div>
+    <div class="motif motif--wine" style="margin-top: var(--sp-6);" aria-hidden="true"></div>
+  </section>
+
+  <!-- FORMULAR — chiar la începutul paginii -->
+  <section class="section--tight on-cream">
+    <div class="container container--narrow">
+      <form class="form" action="https://formspree.io/f/FORMSPREE_ID_RECRUTARE" method="POST" data-ajax-form data-success="Mulțumim pentru înscriere! Te contactăm în curând cu detalii despre selecții.">
+        <input type="hidden" name="_subject" value="Înscriere nouă — Recrutare Ardealul">
+
+        <fieldset>
+          <legend>Datele tale</legend>
+          <div class="form-row form-row--2">
+            <div class="field">
+              <label for="r-nume">Nume complet *</label>
+              <input type="text" id="r-nume" name="nume" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="r-telefon">Telefon *</label>
+              <input type="tel" id="r-telefon" name="telefon" required autocomplete="tel">
+            </div>
+          </div>
+          <div class="form-row form-row--2">
+            <div class="field">
+              <label for="r-email">E-mail *</label>
+              <input type="email" id="r-email" name="email" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="r-facultate">Facultate &amp; an de studiu *</label>
+              <input type="text" id="r-facultate" name="facultate_an" required placeholder="ex: ULBS, Litere, anul II">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Experiență în dans popular</legend>
+          <div class="radio-group">
+            <label><input type="radio" name="experienta" value="Am experienta" required> Am mai dansat popular (la un ansamblu, cerc sau școală)</label>
+            <label><input type="radio" name="experienta" value="Putina experienta"> Am puțină experiență, dar vreau să mă perfecționez</label>
+            <label><input type="radio" name="experienta" value="Fara experienta"> Nu am experiență, dar vreau să învăț de la zero</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Ce te interesează? (poți bifa mai multe)</legend>
+          <div class="check-group">
+            <label><input type="checkbox" name="interes" value="Dans"> Dans / joc popular</label>
+            <label><input type="checkbox" name="interes" value="Solist vocal"> Canto popular (solist vocal)</label>
+            <label><input type="checkbox" name="interes" value="Instrumentist"> Instrument tradițional (instrumentist)</label>
+            <label><input type="checkbox" name="interes" value="Nu stiu inca"> Nu știu încă — vreau să aflu mai multe la selecții</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="r-motivatie">De ce vrei să te alături ansamblului? <span class="hint">(opțional, dar ne ajută să te cunoaștem)</span></label>
+          <textarea id="r-motivatie" name="motivatie"></textarea>
+        </div>
+
+        <div class="field-check">
+          <input type="checkbox" id="gdpr-recrutare" name="acord_gdpr" required>
+          <label for="gdpr-recrutare">Sunt de acord cu prelucrarea datelor cu caracter personal completate mai sus, în scopul procesului de selecție, conform <a class="link" href="politica-confidentialitate.html">Politicii de confidențialitate</a>. *</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Trimite înscrierea</button>
+        <div class="form-status" data-form-status></div>
+      </form>
+    </div>
+  </section>
+
+  <div class="motif motif--gold" aria-hidden="true"></div>
+
+  <!-- CE URMEAZA -->
+  <section class="section on-paper">
+    <div class="container container--narrow">
+      <p class="eyebrow center">Ce urmează după înscriere</p>
+      <h2 class="center mb-6">De la formular, la prima repetiție</h2>
+      <div class="timeline">
+        <div class="timeline__item reveal">
+          <div class="timeline__year">1</div>
+          <p>Primim înscrierea și te contactăm telefonic sau pe e-mail, de regulă în câteva zile.</p>
+        </div>
+        <div class="timeline__item reveal">
+          <div class="timeline__year">2</div>
+          <p>Vii la o repetiție deschisă / sesiune de selecție, unde coregraful și dirijorul te cunosc și evaluează nivelul de la care pornim.</p>
+        </div>
+        <div class="timeline__item reveal">
+          <div class="timeline__year">3</div>
+          <p>Intri în grupul de bază și înveți primii pași — indiferent dacă pornești de la zero sau ai deja experiență.</p>
+        </div>
+        <div class="timeline__item reveal">
+          <div class="timeline__year">4</div>
+          <p>Devii parte din spectacolele ansamblului, pe măsură ce nivelul tău de pregătire o permite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DE CE ARDEALUL -->
+  <section class="section on-ink">
+    <div class="container">
+      <blockquote class="pull reveal">
+        „Vin tineri, pleacă. Dar oricine poate dansa — am lucrat și cu oameni cu handicap, și cu surdomuți. Am rămas uimit de felul cum joacă fără să simtă muzica."
+        <cite>Sorin Bădiță, coregraful ansamblului</cite>
+      </blockquote>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Ansamblul „Ardealul"</h4>
+        <p style="max-width:34ch; font-size:0.92rem;">Ansamblul Folcloric Studențesc „Ardealul" — Casa de Cultură a Studenților Sibiu. Din 1994/1995, ducem mai departe jocul și cântecul din inima Ardealului.</p>
+        <div class="social-row" style="margin-top:1.5rem;">
+          <a href="https://www.facebook.com/AnsamblulArdealuSibiu" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H7.9V12h2.6V9.8c0-2.6 1.5-4 3.9-4 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg></a>
+          <a href="https://www.instagram.com/ansamblul.ardealul" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.youtube.com/@studentsibiu" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.4 3.6 12 3.6 12 3.6h0s-4.4 0-7.3.3c-.4 0-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S1.2 9 1.2 10.9v1.9c0 1.9.3 3.7.3 3.7s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.1.3 7.1.3s4.4 0 7.3-.3c.4 0 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.3-1.9.3-3.7v-1.9c0-1.9-.3-3.7-.3-3.7zM9.8 14.9V8.7l5.9 3.1z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explorează</h4>
+        <ul>
+          <li><a href="despre.html">Despre noi</a></li>
+          <li><a href="repertoriu.html">Repertoriu</a></li>
+          <li><a href="formatie.html">Formație</a></li>
+          <li><a href="evenimente.html">Evenimente</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="presa.html">Presă</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Colaborări</h4>
+        <ul>
+          <li><a href="servicii.html">Angajează ansamblul</a></li>
+          <li><a href="recrutare.html">Recrutare</a></li>
+          <li><a href="parteneri.html">Parteneri</a></li>
+          <li><a href="donatii.html">Donații</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Calea Dumbrăvii, nr. 34, Sibiu</li>
+          <li><a href="mailto:ccssro@yahoo.com">ccssro@yahoo.com</a></li>
+          <li><a href="tel:+40269212883">+40 269 212 883</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Ansamblul Folcloric Studențesc „Ardealul" · Casa de Cultură a Studenților Sibiu</span>
+      <a href="politica-confidentialitate.html">Politica de confidențialitate</a>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" data-to-top aria-label="Înapoi sus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
+<div class="cookie-bar" data-cookie-bar role="dialog" aria-label="Setări cookie-uri">
+  <p>Folosim cookie-uri esențiale pentru buna funcționare a site-ului. Nu folosim cookie-uri de tracking publicitar.</p>
+  <button class="btn btn-gold" data-cookie-accept>Am înțeles</button>
+</div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
