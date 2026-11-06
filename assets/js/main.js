@@ -96,37 +96,6 @@
   }
 
   /* -----------------------------------------------------------------------
-     5. Galerie — lightbox simplu
-     --------------------------------------------------------------------- */
-  var lightbox = document.querySelector("[data-lightbox]");
-  if (lightbox) {
-    var lbBody = lightbox.querySelector("[data-lightbox-body]");
-    var lbClose = lightbox.querySelector("[data-lightbox-close]");
-    document.querySelectorAll("[data-gallery-item]").forEach(function (item) {
-      item.addEventListener("click", function () {
-        var label = item.getAttribute("data-caption") || "";
-        lbBody.innerHTML =
-          '<div class="photo-ph photo-ph--wide" style="max-width:640px;margin-inline:auto;">' +
-          '<span class="photo-ph__label">' + label + "</span></div>";
-        lightbox.classList.add("is-open");
-        lightbox.setAttribute("aria-hidden", "false");
-        lbClose.focus();
-      });
-    });
-    function closeLb() {
-      lightbox.classList.remove("is-open");
-      lightbox.setAttribute("aria-hidden", "true");
-    }
-    if (lbClose) lbClose.addEventListener("click", closeLb);
-    lightbox.addEventListener("click", function (e) {
-      if (e.target === lightbox) closeLb();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeLb();
-    });
-  }
-
-  /* -----------------------------------------------------------------------
      6. Formulare — trimitere prin fetch către Formspree, cu fallback nativ
      Fiecare <form data-ajax-form> are deja action + method reale, deci
      funcționează chiar dacă JS e dezactivat (se face un POST normal).
