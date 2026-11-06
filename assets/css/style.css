@@ -18,6 +18,22 @@
    ------------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap');
 
+/* Arial Narrow nu se poate încorpora pe web (licență Microsoft/Monotype):
+   lista de mai jos folosește Arial Narrow dacă e instalat pe dispozitiv și,
+   altfel, Archivo Narrow (OFL), găzduit local în assets/fonts/. */
+@font-face{ font-family:'Archivo Narrow'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('../fonts/archivo-narrow-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face{ font-family:'Archivo Narrow'; font-style:normal; font-weight:400; font-display:swap;
+  src:url('../fonts/archivo-narrow-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face{ font-family:'Archivo Narrow'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('../fonts/archivo-narrow-latin-ext-700-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face{ font-family:'Archivo Narrow'; font-style:normal; font-weight:700; font-display:swap;
+  src:url('../fonts/archivo-narrow-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
 /* -------------------------------------------------------------------------
    2. TOKENS — paleta „Ardealul": nu cerul crem-terracota generic, ci
    negru-cărbune cald + pergament + vișiniu adânc + auriu de fir + verde molid
@@ -38,6 +54,13 @@
   --gold-light: #D3A94A;
   --pine:       #33473A;   /* verde molid, accent rar */
 
+  /* siglă: culorile din antetul oficial al asociației */
+  --tri-red:    #C00000;
+  --tri-yellow: #FFC000;
+  --tri-blue:   #215E99;
+  --tri-red-on-ink:  #EF6A5E;   /* variante mai luminoase pentru fundal închis */
+  --tri-blue-on-ink: #6FA8DC;
+
   /* text */
   --text-on-ink:   #F2E9D8;
   --text-on-ink-dim: #C9BC9F;
@@ -50,6 +73,7 @@
 
   /* tipografie */
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-brand: 'Arial Narrow', 'Archivo Narrow', 'Liberation Sans Narrow', 'Helvetica Neue Condensed', Arial, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* spațiere (scală 4px) */
@@ -268,66 +292,107 @@ blockquote.pull cite{
    7. COMPONENTE
    ------------------------------------------------------------------------- */
 
-/* -- header / navigare -- */
+/* -- header / navigare --
+   Antet deschis, ca pe hârtia oficială a asociației: emblema dansatorilor,
+   „ANSAMBLUL FOLCLORIC STUDENȚESC” în roșu/galben/albastru și „ARDEALUL”
+   în fontul arhaic. */
 .site-header{
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(30,25,18,0.97);
+  background: rgba(251,247,238,0.97);
+  border-bottom: 1px solid var(--paper-line);
   backdrop-filter: saturate(140%) blur(6px);
 }
 .site-header .container{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
+  gap: var(--sp-4);
+  height: 80px;
+  max-width: 1320px;
 }
+
+/* sigla */
 .brand{
   display: flex;
-  align-items: baseline;
-  gap: var(--sp-2);
+  align-items: center;
+  gap: 0.7rem;
+  flex: none;
   text-decoration: none;
-  color: var(--text-on-ink);
+  color: var(--text-on-cream);
 }
-.brand__mark{
-  font-family: var(--font-display);
+.brand__emblem{ display: block; height: 58px; width: auto; flex: none; }
+.brand__text{ display: flex; flex-direction: column; gap: 5px; width: 10.6rem; }
+.brand__tri{
+  display: block;
+  font-family: var(--font-brand);
   font-weight: 700;
-  font-size: 1.5rem;
-  font-variation-settings: 'SOFT' 40;
-  letter-spacing: -0.01em;
-}
-.brand__tag{
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  line-height: 1;
   text-transform: uppercase;
-  color: var(--text-on-ink-dim);
-  display: none;
+  text-align: justify;
+  text-align-last: justify;
+  white-space: nowrap;
 }
-@media (min-width: 640px){ .brand__tag{ display: inline; } }
+.brand__word{ display: block; width: 100%; height: auto; }
+.tri-r{ color: var(--tri-red); }
+.tri-y{ color: var(--tri-yellow); text-shadow: 0 0 1px rgba(30,25,18,0.45); }
+.tri-b{ color: var(--tri-blue); }
+.on-ink .tri-r, .tri-r.on-ink{ color: var(--tri-red-on-ink); }
+.on-ink .tri-b, .tri-b.on-ink{ color: var(--tri-blue-on-ink); }
+.on-ink .tri-y{ text-shadow: none; }
+
+/* pe fundal închis, sigla stă pe o plăcuță de hârtie (ca antetul oficial) */
+.brand--plate{
+  display: inline-flex;
+  background: var(--paper);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-m, 6px);
+  margin-bottom: var(--sp-4);
+}
+.brand--plate .brand__emblem{ height: 84px; }
+.brand--plate .brand__text{ width: 13.5rem; gap: 6px; }
+.brand--plate .brand__tri{ font-size: 0.86rem; }
+.brand__assoc{
+  display: block;
+  font-family: var(--font-brand);
+  font-weight: 700;
+  font-size: 0.86rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000;
+  text-align: justify;
+  text-align-last: justify;
+}
 
 .nav{
   display: none;
   align-items: center;
-  gap: var(--sp-6);
+  gap: 1.25rem;
 }
 .nav a{
+  white-space: nowrap;
   font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
-  color: var(--text-on-ink-dim);
+  color: var(--text-on-cream-dim);
   transition: color var(--dur) var(--ease);
   position: relative;
 }
-.nav a:hover, .nav a:focus-visible, .nav a[aria-current="page"]{ color: var(--text-on-ink); }
+.nav a:hover, .nav a:focus-visible, .nav a[aria-current="page"]{ color: var(--text-on-cream); }
 .nav a[aria-current="page"]::after{
   content: "";
   position: absolute;
   left: 0; right: 0; bottom: -6px;
   height: 2px;
-  background: var(--gold);
+  background: var(--wine);
 }
 .header-ctas{ display: none; align-items: center; gap: var(--sp-3); }
-@media (min-width: 1080px){
+.site-header .btn-ghost-ink{ color: var(--text-on-cream); border-color: #CDBE9E; }
+.site-header .btn-ghost-ink:hover, .site-header .btn-ghost-ink:focus-visible{ border-color: var(--wine); color: var(--wine); }
+@media (min-width: 1300px){
   .nav{ display: flex; }
   .header-ctas{ display: flex; }
 }
@@ -336,17 +401,23 @@ blockquote.pull cite{
   display: inline-flex;
   width: 42px; height: 42px;
   align-items: center; justify-content: center;
-  background: none; border: 1px solid var(--ink-line);
+  background: none; border: 1px solid #CDBE9E;
   border-radius: var(--radius-s);
-  color: var(--text-on-ink);
+  color: var(--text-on-cream);
 }
-@media (min-width: 1080px){ .nav-toggle{ display: none; } }
+@media (min-width: 1300px){ .nav-toggle{ display: none; } }
 .nav-toggle svg{ width: 20px; height: 20px; }
+/* pe ecrane mici sigla se micșorează puțin */
+@media (max-width: 420px){
+  .brand__emblem{ height: 50px; }
+  .brand__text{ width: 9rem; }
+  .brand__tri{ font-size: 0.6rem; }
+}
 
 .mobile-nav{
   position: fixed;
-  inset: 76px 0 0 0;
-  background: var(--ink);
+  inset: 80px 0 0 0;
+  background: var(--paper);
   z-index: 99;
   padding: var(--sp-6) var(--sp-5);
   overflow-y: auto;
@@ -359,14 +430,16 @@ blockquote.pull cite{
 .mobile-nav a{
   display: block;
   padding: var(--sp-3) 0;
-  border-bottom: 1px solid var(--ink-line);
-  color: var(--text-on-ink);
+  border-bottom: 1px solid var(--paper-line);
+  color: var(--text-on-cream);
   text-decoration: none;
   font-size: 1.1rem;
   font-family: var(--font-display);
 }
+.mobile-nav .btn{ border-bottom: 1px solid; }
+.mobile-nav .btn-gold{ border-color: var(--gold); }
 .mobile-nav .header-ctas{ display: flex; flex-direction: column; margin-top: var(--sp-6); }
-@media (min-width: 1080px){ .mobile-nav{ display: none; } }
+@media (min-width: 1300px){ .mobile-nav{ display: none; } }
 
 /* -- butoane -- */
 .btn{
@@ -412,6 +485,11 @@ blockquote.pull cite{
 }
 .hero__inner{ position: relative; max-width: 46ch; }
 .hero__kicker{ margin-bottom: var(--sp-4); }
+.brand-kicker{ font-family: var(--font-brand); font-size: 0.95rem; letter-spacing: 0.1em; }
+.brand-kicker .tri-r{ color: var(--tri-red-on-ink); }
+.brand-kicker .tri-b{ color: var(--tri-blue-on-ink); }
+.brand-kicker .tri-y{ text-shadow: none; }
+@media (max-width: 480px){ .brand-kicker{ font-size: 0.8rem; letter-spacing: 0.06em; } }
 .hero__title{ margin-bottom: var(--sp-5); }
 .hero__title em{
   font-style: normal;
@@ -775,6 +853,7 @@ fieldset legend{ font-size: 0.86rem; font-weight: 600; margin-bottom: var(--sp-2
 .mt-0{ margin-top: 0; } .mb-0{ margin-bottom: 0; }
 .mt-2{ margin-top: var(--sp-5); } .mb-2{ margin-bottom: var(--sp-5); }
 .mt-4{ margin-top: var(--sp-7); } .mb-4{ margin-bottom: var(--sp-7); }
+.mt-6{ margin-top: var(--sp-7); } .mb-6{ margin-bottom: var(--sp-7); } /* folosite deja în HTML, lipseau din CSS */
 .center{ text-align: center; margin-inline: auto; }
 .max-prose{ max-width: 68ch; }
 .divider-space{ height: var(--sp-8); }
@@ -795,3 +874,184 @@ fieldset legend{ font-size: 0.86rem; font-weight: 600; margin-bottom: var(--sp-2
   .event-card{ grid-template-columns: 64px 1fr; }
   .hero{ padding-block: var(--sp-8) var(--sp-7); }
 }
+
+/* -------------------------------------------------------------------------
+   12. EVENIMENTE & TRANSMISII LIVE
+   Stare eveniment (Astăzi / Mâine / Încheiat), banda „live" de pe prima
+   pagină, pagina Transmisii live și playerul YouTube încărcat doar la cerere.
+   ------------------------------------------------------------------------- */
+[hidden]{ display: none !important; }
+[id]{ scroll-margin-top: 96px; }
+.btn-sm{ padding: 0.6rem 1.05rem; font-size: 0.86rem; }
+a.link--ext::after{ content: " \2197"; font-size: 0.85em; }
+
+/* punct „live" cu puls discret (se oprește la prefers-reduced-motion, secțiunea 3) */
+.live-dot{
+  --pulse: 211,169,74;
+  display: inline-block;
+  flex: none;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  animation: live-pulse 2.2s ease-out infinite;
+}
+@keyframes live-pulse{
+  0%  { box-shadow: 0 0 0 0 rgba(var(--pulse), 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(var(--pulse), 0); }
+  100%{ box-shadow: 0 0 0 0 rgba(var(--pulse), 0); }
+}
+.nav a.nav__live{ display: inline-flex; align-items: center; gap: 0.5rem; }
+.nav .live-dot{ width: 7px; height: 7px; }
+.mobile-nav a.nav__live{ display: flex; align-items: center; gap: var(--sp-3); }
+
+/* etichetă de stare — textul îl actualizează main.js după data din Europa/București */
+.event-status{
+  display: inline-block;
+  margin-left: var(--sp-2);
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+  background: rgba(30,25,18,0.08);
+  color: var(--text-on-cream-dim);
+}
+.event-status[data-state="today"]{ background: var(--wine); color: #fff; }
+.event-status[data-state="tomorrow"]{ background: var(--gold); color: var(--ink); }
+
+/* card eveniment — completări */
+.event-card h3{ margin-bottom: var(--sp-2); }
+.event-card__actions{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--sp-3) var(--sp-5);
+  margin-top: var(--sp-4);
+  font-size: 0.92rem;
+}
+.event-card:target{ border-color: var(--gold); box-shadow: var(--shadow-2); }
+.event-card.is-past .event-card__date{ opacity: 0.55; }
+
+/* bandă „transmisii live" (prima pagină) */
+.live-strip{ background: var(--wine); color: var(--cream); }
+.live-strip__inner{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--sp-3) var(--sp-6);
+  padding-block: var(--sp-4);
+}
+.live-strip__label{
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cream);
+}
+.live-strip__list{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--sp-2) var(--sp-6);
+  flex: 1 1 320px;
+}
+.live-strip__item{
+  display: inline-flex; flex-wrap: wrap; align-items: baseline;
+  gap: var(--sp-2);
+  color: var(--cream); text-decoration: none; font-size: 0.92rem;
+}
+.live-strip__item strong{ font-family: var(--font-display); font-size: 1.08rem; font-weight: 600; }
+.live-strip__item:hover strong, .live-strip__item:focus-visible strong{ text-decoration: underline; text-underline-offset: 3px; }
+.live-strip .event-status{ margin-left: 0; background: rgba(242,233,216,0.16); color: var(--cream); }
+.live-strip .event-status[data-state="today"]{ background: var(--cream); color: var(--wine-dark); }
+.live-strip .event-status[data-state="tomorrow"]{ background: var(--gold-light); color: var(--ink); }
+
+/* insignă „transmisie live" */
+.live-badge{
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--wine); color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(211,169,74,0.35);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.live-badge .live-dot{ width: 8px; height: 8px; }
+.live-badge--rec{ background: rgba(242,233,216,0.14); color: var(--cream); box-shadow: none; }
+
+/* player YouTube — fațadă fără conexiune externă, înlocuită cu iframe la click */
+.player{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  color: var(--text-on-ink);
+}
+.player iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.player__facade{
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  padding: clamp(1rem, 3vw, 2.25rem);
+  background:
+    radial-gradient(520px 300px at 92% 0%, rgba(126,42,34,0.6), transparent),
+    radial-gradient(420px 260px at 0% 110%, rgba(176,127,34,0.22), transparent),
+    var(--ink);
+}
+.player__facade::after{
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 13px;
+  background-color: var(--gold);
+  opacity: 0.9;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='13' viewBox='0 0 32 13'%3E%3Cpath d='M0 11 L8 2 L16 11 L24 2 L32 11' stroke='%23000' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='13' viewBox='0 0 32 13'%3E%3Cpath d='M0 11 L8 2 L16 11 L24 2 L32 11' stroke='%23000' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x;
+  -webkit-mask-size: 32px 13px; mask-size: 32px 13px;
+}
+.player__title{
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 0.9rem + 1.8vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-on-ink);
+  max-width: 22ch;
+  margin: var(--sp-3) 0 var(--sp-4);
+}
+.player-note{ font-size: 0.8rem; color: var(--text-on-cream-dim); margin-top: var(--sp-3); }
+
+/* card transmisie (pagina Transmisii live) */
+.live-card{
+  display: grid;
+  gap: var(--sp-5) var(--sp-7);
+  grid-template-columns: minmax(0, 1fr);
+}
+.live-card__head{ display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
+.live-card__title{ font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem); }
+.live-card__meta{ display: grid; gap: var(--sp-1); font-size: 0.94rem; color: var(--text-on-cream-dim); }
+.live-card__meta strong{ color: var(--text-on-cream); }
+.live-card__body p{ color: var(--text-on-cream-dim); }
+.live-card__links{ display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); margin-top: var(--sp-4); font-size: 0.92rem; }
+@media (min-width: 900px){
+  .live-card{
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-areas: "head player" "body player";
+    grid-template-rows: auto 1fr;
+    align-items: start;
+  }
+  .live-card__head{ grid-area: head; }
+  .live-card__body{ grid-area: body; }
+  .live-card__player{ grid-area: player; }
+  .live-card--reverse{
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-areas: "player head" "player body";
+  }
+}
+
+@media (max-width: 480px){
+  .player__facade{ padding: var(--sp-4); }
+  .player__title{ margin: var(--sp-2) 0 var(--sp-3); font-size: 1.2rem; }
+  .player .btn{ padding: 0.6rem 1rem; font-size: 0.88rem; }
+  /* blocul de dată: „NOIEMBRIE" nu încăpea în 64px */
+  .event-card{ grid-template-columns: 72px minmax(0, 1fr); gap: var(--sp-4); padding: var(--sp-4); }
+  .live-card__head{ grid-template-columns: 72px minmax(0, 1fr); gap: var(--sp-4); }
+  .event-card__date{ padding: var(--sp-3) var(--sp-1); }
+  .event-card__month{ font-size: 0.58rem; letter-spacing: 0.04em; }
+}
+
+/* retușuri generale descoperite la verificarea în browser */
+.site-footer ul{ list-style: none; margin: 0; padding: 0; }   /* footerul afișa buline */
+h1, h2, h3{ text-wrap: balance; }                             /* fără un singur cuvânt pe ultimul rând */
