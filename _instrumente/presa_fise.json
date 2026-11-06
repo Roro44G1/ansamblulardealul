@@ -1,6 +1,71 @@
 {
  "fise": [
   {
+   "iso": "2022-11-07",
+   "data": "07.11.2022",
+   "autor": "Autor: Calin Blaga",
+   "titlu": "Compania de Teatru Dans Microbis Sibiu premiată la Festivalul Național Studențesc de Teatru Contemporan “ACTFEST” Galați",
+   "subiect": "Premii și distincții",
+   "rezumat": "Compania Microbis a CCS Sibiu a obținut cinci premii la Festivalul Național Studențesc „ACTFEST” de la Galați; directoarea Liliana Popescu comentează rezultatele și amintește premiile Ansamblului „Ardealul” de la Iași.",
+   "nume": "Sibiu Independent",
+   "link": "https://sibiuindependent.ro/2022/11/07/compaia-de-teatru-dans-microbis-sibiu-premiata-la-festivalul-national-studentesc-de-teatru-contemporan-actfest-galati/",
+   "cale_img": null,
+   "varianta": "a",
+   "img_url": "https://s3.palmasolutions.net/sibiuindependent/wp-content/uploads/2022/11/05033935/ACTFEST-2.jpg"
+  },
+  {
+   "iso": "2016-11-22",
+   "data": "22.11.2016",
+   "autor": "Autor: Ora de Sibiu",
+   "titlu": "Premii, trofee și multe aplauze pentru Ansamblul ”Ardealul”, Formaţia de Dans M M și nu numai",
+   "subiect": "Premii și distincții",
+   "rezumat": "Bilanțul premiilor obținute de formațiile CCS Sibiu (Ansamblul „Ardealul”, Formația de dans M&M și altele) în toamna lui 2016.",
+   "nume": "Ora de Sibiu",
+   "link": "https://www.oradesibiu.ro/2016/11/22/premii-trofee-si-multe-aplauze-pentru-ansamblul-ardealul-formatia-de-dans-mm-si-nu-numai/",
+   "cale_img": null,
+   "varianta": "c",
+   "img_url": "https://cdn.oradesibiu.ro/wp-content/uploads/2016/11/Ardealul01.jpg"
+  },
+  {
+   "iso": "2016-09-21",
+   "data": "21.09.2016",
+   "autor": "Autor: Ștefan Dobre",
+   "titlu": "Interpretul sibian Radu Goța a obținut premiul de popularitate la Festivalul Național de Folclor de la Alba Iulia",
+   "subiect": "Premii și distincții",
+   "rezumat": "Radu Goța, solist al Ansamblului „Ardealul” al CCS Sibiu, premiat la festivaluri de folclor din Timișoara și Alba Iulia.",
+   "nume": "Turnul Sfatului",
+   "link": "https://www.turnulsfatului.ro/2016/09/21/interpretul-sibian-radu-gota-a-obtinut-premiul-de-popularitate-la-festivalul-national-de-folclor-de-la-alba-iulia-68066/",
+   "cale_img": null,
+   "varianta": "c",
+   "img_url": "https://www.turnulsfatului.ro/wp-content/uploads/2016/09/radugota-lerh.jpeg"
+  },
+  {
+   "iso": "2015-01-26",
+   "data": "26.01.2015",
+   "autor": "Autor: Raluca Buduşan",
+   "titlu": "Casa de Cultură a Studenților Sibiu. Produs în Sibiu.",
+   "subiect": "Despre instituție",
+   "rezumat": "Profil al instituției: CCS Sibiu ca platformă unde proiectele propuse de studenți devin programe, cu formațiile Ardealul, Microbis și M&M, turnee în Europa și Asia și planuri pentru 2015 (Sibiu Dans Festival, ediția a XII-a, și aniversarea de 20 de ani a Ansamblului Ardealul).",
+   "nume": "Sibiu 100%",
+   "link": "https://sibiu100.ro/economie/casa-de-cultura-studentilor-sibiu-produs-sibiu/",
+   "cale_img": null,
+   "varianta": "a",
+   "img_url": "https://sibiu100.ro/wp-content/uploads/2015/01/CASA4.jpg"
+  },
+  {
+   "iso": "2010-09-06",
+   "data": "06.09.2010",
+   "autor": "Autor: Redacția Adevărul",
+   "titlu": "Cel mai tânăr director din Sibiu vrea să schimbe radical modul de a conduce instituţiile publice",
+   "subiect": "Despre instituție",
+   "rezumat": "Portret al directorului CCS Sibiu, Cornel-Alin Macarie, care își propune o instituție deschisă inițiativelor studențești; articolul prezintă formațiile Casei – Ansamblul „Ardealul”, M&M și Compania Microbis – și turneele lor din 2010.",
+   "nume": "Adevărul",
+   "link": "https://adevarul.ro/stiri-locale/sibiu/cel-mai-tanar-director-din-sibiu-vrea-sa-schimbe-1233502.html",
+   "cale_img": null,
+   "varianta": "c",
+   "img_url": ""
+  },
+  {
    "iso": "2026-11-06",
    "data": "06.11.2026",
    "autor": "Autor: Stefania Vesa",

@@ -5,8 +5,9 @@ CCS Sibiu (https://casastudentilorsibiu.ro/noutati/ccss-in-presa/), fără expor
 Același flux ca la microbis.ro (_instrumente/presa_din_ccss.py din depozitul microbis).
 
 Ce intră: fișele din dosarul CCSS cu subiectele din SUBIECTE_PAGINA (exact selecția din
-PDF-urile filtrate folosite inițial). Fișele cu „Ardealul” în text, dar cu alt subiect,
-apar doar în raport, la „de verificat”.
+PDF-urile filtrate folosite inițial) și fișele cu alt subiect care pomenesc Ardealul în context
+de spectacol, concert, premii, festival sau turnee (regula din 7.11.2026, vezi in_context).
+Mențiunile din listele de finanțare apar doar în raport, la „de verificat”.
 
 Sursa de adevăr a paginii e  _instrumente/presa_fise.json  (toate fișele din pagină).
 Fișele existente NU se rescriu: se adaugă doar cele noi. Se regenerează doar dosarul
@@ -15,6 +16,8 @@ de presă (secțiunile div.press-year); restul paginii rămâne neatins. Graficu
 
 Comenzi:
   python3 presa_din_ccss.py init        o singură dată: presa.html → presa_fise.json
+  python3 presa_din_ccss.py descarca DOSAR
+                                        salvează datele CCSS în DOSAR (pagina.html + rest.json)
   python3 presa_din_ccss.py noi [--sursa pagina.html --sursa rest.json]
                                         fișele noi din dosarul CCSS → presa_noi.json
   python3 presa_din_ccss.py aplica      adaugă fișele din presa_noi.json, descarcă imaginile
@@ -48,6 +51,11 @@ NOI = AICI / "presa_noi.json"
 
 SUBIECTE_PAGINA = {"Ansamblul „Ardealul”", "Festivalul „Tradiții”", "Joc și Tradiție"}
 CUVINTE_CHEIE = re.compile(r"ardealul|joc\s+si\s+traditie|festivalul\s+.?traditii")  # doar pentru „de verificat”
+# Regula lui Radu (7.11.2026): fișele cu alt subiect intră și ele dacă pomenesc Ardealul în context
+# de spectacol, concert, premii, festival (inclusiv turnee). Mențiunile din listele de finanțare nu intră.
+MENTIUNE = re.compile(r"ardealul")
+CONTEXT = re.compile(r"spectacol|concert|premi|trofe|festival|\bgal[ae]i?\b|recital|turne|scen[ae]|aplauz")
+SUBIECTE_EXCLUSE = {"Finanțări pentru proiecte"}
 
 URL_CCSS = "https://casastudentilorsibiu.ro/noutati/ccss-in-presa/"
 URL_REST = ("https://casastudentilorsibiu.ro/wp-json/wp/v2/posts?categories=114&per_page=100"
@@ -185,6 +193,46 @@ def date_ccss(surse=()):
     return unice
 
 
+def in_context(x):
+    """Fișă cu alt subiect care pomenește Ardealul la spectacol, concert, premii, festival, turnee."""
+    if x.get("tp") in SUBIECTE_EXCLUSE:
+        return False
+    text = fara_diacritice(x["t"] + " " + x.get("s", ""))
+    return bool(MENTIUNE.search(text) and CONTEXT.search(text))
+
+
+def descarca(dosar):
+    """Salvează datele CCSS (pagina „CCSS în presă” + categoria 114) în `dosar`,
+    cu reîncercări când site-ul răspunde cu pagina anti-bot."""
+    d = Path(dosar)
+    d.mkdir(parents=True, exist_ok=True)
+
+    def cu_reincercari(url, e_bun):
+        for _ in range(6):
+            try:
+                text = _get(url)
+                if e_bun(text):
+                    return text
+                print("  răspuns anti-bot, reîncerc peste 30 s…")
+            except Exception as e:
+                print(f"  eroare {type(e).__name__}, reîncerc peste 30 s…")
+            time.sleep(30)
+        sys.exit(f"Nu am putut citi {url} după 6 încercări.")
+
+    pagina = cu_reincercari(URL_CCSS, lambda t: 'class="pr-data"' in t)
+    (d / "pagina.html").write_text(pagina, encoding="utf-8")
+    rest, nr = [], 1
+    while True:
+        time.sleep(20)  # site-ul CCSS răspunde cu anti-bot la cereri dese
+        lot = json.loads(cu_reincercari(URL_REST.format(nr), lambda t: t.lstrip().startswith("[")))
+        rest += lot
+        if len(lot) < 100:
+            break
+        nr += 1
+    (d / "rest.json").write_text(json.dumps(rest, ensure_ascii=False), encoding="utf-8")
+    print(f"Salvat în {d}: pagina.html ({len(_din_pagina(pagina))} fișe) + rest.json ({len(rest)} articole)")
+
+
 def fisa_din_ccss(x, nume_cunoscute):
     nume = x["p"].split(" · ")[0].split(" (")[0]
     nume = nume_cunoscute.get(cheie(nume), nume)  # aceeași grafie ca în pagină (de ex. „Agerpres”)
@@ -212,7 +260,7 @@ def noi(surse=()):
     for x in toate:
         if url_norm(x["u"]) in existente:
             continue
-        if x.get("tp") in SUBIECTE_PAGINA:
+        if x.get("tp") in SUBIECTE_PAGINA or in_context(x):
             gasite.append(fisa_din_ccss(x, nume_cunoscute))
         elif CUVINTE_CHEIE.search(fara_diacritice(x["t"] + " " + x.get("s", ""))):
             de_verificat.append(x)
@@ -328,6 +376,8 @@ def main():
     cmd = a[0] if a else ""
     if cmd == "init":
         init()
+    elif cmd == "descarca" and len(a) > 1:
+        descarca(a[1])
     elif cmd == "noi":
         noi([a[i + 1] for i, v in enumerate(a) if v == "--sursa"])
     elif cmd == "aplica":
