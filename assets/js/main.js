@@ -271,39 +271,50 @@
   })();
 
   /* -----------------------------------------------------------------------
-     9. Presă — filtru pe an
-     Fără JS, toate apariții rămân vizibile, grupate pe ani. Cu JS apare un rând
-     de butoane generat din secțiunile .press-year (anul și numărul de apariții
-     se calculează singure, deci un articol nou nu cere nicio altă modificare).
+     9. Presă — grafic pe ani, care este și filtrul
+     Fără JS, toate apariții rămân vizibile, grupate pe ani. Cu JS apare graficul
+     (generat din secțiunile .press-year, deci anul, numărul și înălțimea barelor
+     se calculează singure). Clic pe o bară arată doar anul respectiv; încă un
+     clic, sau „Toate”, arată din nou tot.
      --------------------------------------------------------------------- */
   (function () {
     var root = document.querySelector("[data-press]");
     if (!root) return;
     var years = root.querySelectorAll(".press-year[data-press-year]");
-    var bar = root.querySelector("[data-press-filter]");
+    var chart = root.querySelector("[data-press-chart]");
+    var bars = root.querySelector("[data-press-bars]");
+    var allBtn = root.querySelector("[data-press-all]");
     var count = root.querySelector("[data-press-count]");
-    if (!years.length || !bar) return;
+    if (!years.length || !chart || !bars) return;
 
-    var total = 0, buttons = [];
-    function add(label, value, n) {
+    var perYear = {}, total = 0, min = 9999, max = 0, top = 0;
+    years.forEach(function (y) {
+      var yr = +y.getAttribute("data-press-year");
+      var n = y.querySelectorAll(".press-item").length;
+      perYear[yr] = n; total += n; top = Math.max(top, n);
+      min = Math.min(min, yr); max = Math.max(max, yr);
+    });
+
+    var buttons = [];
+    for (var yr = min; yr <= max; yr++) {
+      var n = perYear[yr] || 0;
       var b = document.createElement("button");
       b.type = "button";
-      b.className = "press-chip";
-      b.setAttribute("data-value", value);
+      b.className = "press-bar";
+      b.setAttribute("data-value", String(yr));
       b.setAttribute("aria-pressed", "false");
-      b.textContent = label;
-      var s = document.createElement("span");
-      s.className = "press-chip__n";
-      s.textContent = n;
-      b.appendChild(s);
-      bar.appendChild(b);
-      buttons.push(b);
+      b.setAttribute("aria-label", yr + ": " + n + (n === 1 ? " apariție" : " apariții"));
+      if (!n) b.disabled = true;
+      var num = document.createElement("span"); num.className = "press-bar__n"; num.textContent = n;
+      var col = document.createElement("span"); col.className = "press-bar__col"; col.style.height = Math.max(2, Math.round(n / top * 140)) + "px";
+      var lab = document.createElement("span"); lab.className = "press-bar__y"; lab.textContent = yr;
+      b.appendChild(num); b.appendChild(col); b.appendChild(lab);
+      bars.appendChild(b); buttons.push(b);
     }
-    years.forEach(function (y) { total += y.querySelectorAll(".press-item").length; });
-    add("Toate", "all", total);
-    years.forEach(function (y) { add(y.getAttribute("data-press-year"), y.getAttribute("data-press-year"), y.querySelectorAll(".press-item").length); });
 
+    var current = "all";
     function apply(value) {
+      current = value;
       var shown = 0;
       years.forEach(function (y) {
         var show = value === "all" || y.getAttribute("data-press-year") === value;
@@ -311,12 +322,19 @@
         if (show) shown += y.querySelectorAll(".press-item").length;
       });
       buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-value") === value ? "true" : "false"); });
+      if (allBtn) allBtn.setAttribute("aria-pressed", value === "all" ? "true" : "false");
       if (count) count.textContent = value === "all"
-        ? total + " de apariții, din " + years[years.length - 1].getAttribute("data-press-year") + " până azi"
+        ? total + " de apariții, din " + min + " până azi"
         : shown + (shown === 1 ? " apariție" : " apariții") + " în " + value;
     }
-    buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-value")); }); });
-    bar.hidden = false;
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute("data-value");
+        apply(current === v ? "all" : v);
+      });
+    });
+    if (allBtn) allBtn.addEventListener("click", function () { apply("all"); });
+    chart.hidden = false;
     var m = /^#an-(\d{4})$/.exec(location.hash);
     apply(m && root.querySelector('.press-year[data-press-year="' + m[1] + '"]') ? m[1] : "all");
   })();
