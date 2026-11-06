@@ -190,6 +190,16 @@
     trigger.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0) return;
       e.preventDefault();
+      /* YouTube refuză playerul încorporat dacă pagina nu are o adresă web (eroare 152/153),
+         de exemplu când fișierul e deschis direct din folder. Afișăm explicația în loc de eroare. */
+      if (location.protocol === "file:") {
+        var note = document.createElement("p");
+        note.className = "player__title";
+        note.textContent = "Playerul funcționează pe site-ul publicat, nu din fișierele deschise local. Pe adresa reală a site-ului pornește normal.";
+        player.textContent = "";
+        player.appendChild(note);
+        return;
+      }
       var frame = document.createElement("iframe");
       frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
       frame.title = player.getAttribute("data-yt-title") || "Transmisie video";
@@ -258,5 +268,56 @@
       });
       strip.hidden = remaining === 0;
     });
+  })();
+
+  /* -----------------------------------------------------------------------
+     9. Presă — filtru pe an
+     Fără JS, toate apariții rămân vizibile, grupate pe ani. Cu JS apare un rând
+     de butoane generat din secțiunile .press-year (anul și numărul de apariții
+     se calculează singure, deci un articol nou nu cere nicio altă modificare).
+     --------------------------------------------------------------------- */
+  (function () {
+    var root = document.querySelector("[data-press]");
+    if (!root) return;
+    var years = root.querySelectorAll(".press-year[data-press-year]");
+    var bar = root.querySelector("[data-press-filter]");
+    var count = root.querySelector("[data-press-count]");
+    if (!years.length || !bar) return;
+
+    var total = 0, buttons = [];
+    function add(label, value, n) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "press-chip";
+      b.setAttribute("data-value", value);
+      b.setAttribute("aria-pressed", "false");
+      b.textContent = label;
+      var s = document.createElement("span");
+      s.className = "press-chip__n";
+      s.textContent = n;
+      b.appendChild(s);
+      bar.appendChild(b);
+      buttons.push(b);
+    }
+    years.forEach(function (y) { total += y.querySelectorAll(".press-item").length; });
+    add("Toate", "all", total);
+    years.forEach(function (y) { add(y.getAttribute("data-press-year"), y.getAttribute("data-press-year"), y.querySelectorAll(".press-item").length); });
+
+    function apply(value) {
+      var shown = 0;
+      years.forEach(function (y) {
+        var show = value === "all" || y.getAttribute("data-press-year") === value;
+        y.hidden = !show;
+        if (show) shown += y.querySelectorAll(".press-item").length;
+      });
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-value") === value ? "true" : "false"); });
+      if (count) count.textContent = value === "all"
+        ? total + " de apariții, din " + years[years.length - 1].getAttribute("data-press-year") + " până azi"
+        : shown + (shown === 1 ? " apariție" : " apariții") + " în " + value;
+    }
+    buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-value")); }); });
+    bar.hidden = false;
+    var m = /^#an-(\d{4})$/.exec(location.hash);
+    apply(m && root.querySelector('.press-year[data-press-year="' + m[1] + '"]') ? m[1] : "all");
   })();
 })();

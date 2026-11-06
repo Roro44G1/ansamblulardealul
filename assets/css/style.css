@@ -569,15 +569,71 @@ blockquote.pull cite{
 }
 .event-card__meta{ font-size: 0.88rem; color: var(--text-on-cream-dim); margin-top: var(--sp-2); }
 
-/* card presă */
-.press-card{
-  padding: var(--sp-5) 0;
-  border-bottom: 1px solid var(--paper-line);
-  display: grid;
-  gap: var(--sp-2);
+/* presă — fișe de apariții, grupate pe ani, cu filtru pe an */
+.press-filter{ display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-6); }
+.press-filter[hidden]{ display: none; }
+.press-chip{
+  font: inherit; font-size: 0.88rem; font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid #CDBE9E;
+  background: var(--paper);
+  color: var(--text-on-cream);
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
-.press-card__source{ font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wine); }
-.press-card__date{ font-size: 0.82rem; color: var(--text-on-cream-dim); }
+.press-chip:hover, .press-chip:focus-visible{ border-color: var(--wine); color: var(--wine); }
+.press-chip[aria-pressed="true"]{ background: var(--ink); border-color: var(--ink); color: var(--text-on-ink); }
+.press-chip__n{ font-weight: 500; opacity: 0.7; margin-left: 0.35em; }
+.press-count{ color: var(--text-on-cream-dim); font-size: 0.95rem; margin: calc(var(--sp-2) * -1) 0 var(--sp-5); }
+.press-year{ margin-top: var(--sp-7); scroll-margin-top: 96px; }
+.press-year:first-of-type{ margin-top: 0; }
+.press-year[hidden]{ display: none; }
+.press-year__title{
+  font-size: 1.9rem;
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-5);
+  border-bottom: 2px solid var(--wine);
+}
+.press-grid{ display: grid; gap: var(--sp-5); grid-template-columns: 1fr; }
+@media (min-width: 720px){ .press-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px){ .press-grid{ grid-template-columns: repeat(3, 1fr); } }
+.press-item{
+  display: flex; flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-m, 6px);
+  overflow: hidden;
+}
+.press-item__head{
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+  min-height: 74px;
+  padding: var(--sp-4) var(--sp-5);
+  color: var(--text-on-ink);
+  border-bottom: 3px solid var(--gold);
+}
+.press-item__head--a{ background: var(--ink); }
+.press-item__head--b{ background: var(--wine-dark); }
+.press-item__head--c{ background: var(--pine); }
+.press-item__head--d{ background: #4A3B22; }
+.press-item__outlet{ font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; }
+.press-item__label{
+  flex: none;
+  font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.25rem 0.55rem; border-radius: 999px;
+  background: var(--gold-light); color: var(--ink);
+}
+.press-item__body{ display: flex; flex-direction: column; flex: 1; padding: var(--sp-5); gap: var(--sp-2); }
+.press-item__meta{ font-size: 0.82rem; color: var(--text-on-cream-dim); }
+.press-item__title{ font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; line-height: 1.3; letter-spacing: 0; text-transform: none; color: var(--text-on-cream); }
+.press-item__text{ font-size: 0.93rem; color: var(--text-on-cream-dim); }
+.press-item__link{
+  margin-top: auto; padding-top: var(--sp-3);
+  font-size: 0.86rem; font-weight: 700; color: var(--wine); text-decoration: none;
+}
+.press-item__link:hover, .press-item__link:focus-visible{ text-decoration: underline; }
+.press-note{ margin-top: var(--sp-6); font-size: 0.9rem; color: var(--text-on-cream-dim); }
 
 /* card echipă */
 .person{ text-align: left; }
