@@ -1,0 +1,39 @@
+# Descarcă imaginile fișelor noi de presă (cele adăugate fără imagine locală)
+# și regenerează presa.html. Rulează după fiecare push care schimbă
+# _instrumente/presa_fise.json; se poate porni și manual din fila Actions.
+name: Imagini presă
+
+on:
+  push:
+    branches: [master]
+    paths: ["_instrumente/presa_fise.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: presa-imagini
+  cancel-in-progress: false
+
+jobs:
+  imagini:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - run: python3 _instrumente/presa_din_ccss.py imagini
+      - name: Commit imagini (dacă s-a descărcat ceva)
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nicio imagine nouă."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Presă: imagini descărcate automat"
+          git push
