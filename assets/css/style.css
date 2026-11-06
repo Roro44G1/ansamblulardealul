@@ -358,14 +358,23 @@ blockquote.pull cite{
   display: block;
   font-family: var(--font-brand);
   font-weight: 700;
-  font-size: 0.86rem;
+  font-size: 1.12rem;
   line-height: 1;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.26em;
+  padding-left: 0.26em;          /* compensează spațiul de după ultima literă, pentru centrare optică */
   text-transform: uppercase;
   color: #000;
-  text-align: justify;
-  text-align-last: justify;
+  text-align: center;
 }
+.footer-fiscal{
+  margin: var(--sp-4) 0 var(--sp-3);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-on-ink-dim);
+}
+.footer-fiscal strong{ color: var(--text-on-ink); font-weight: 600; }
+.site-footer .footer-fiscal a{ color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+.site-footer .footer-fiscal a:hover, .site-footer .footer-fiscal a:focus-visible{ color: #fff; }
 
 .nav{
   display: none;
