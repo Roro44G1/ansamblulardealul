@@ -1,6 +1,32 @@
 {
  "fise": [
   {
+   "iso": "2026-11-07",
+   "data": "07.11.2026",
+   "autor": "Autor: Redactia AMOS News",
+   "titlu": "Festivalul ‘Tradiții’, 7 noiembrie 2026",
+   "subiect": "Festivalul „Tradiții”",
+   "rezumat": "Anunță Festivalul „Tradiții” din 7 noiembrie 2026, de la Centrul Cultural „Ion Besoiu”, organizat de Casa de Cultură a Studenților Sibiu, cu ansambluri folclorice studențești din Ardeal, Banat și Muntenia.",
+   "nume": "AMOS News",
+   "link": "https://www.amosnews.ro/festivalul-traditii-7-noiembrie-2026/",
+   "cale_img": null,
+   "varianta": "c",
+   "img_url": "https://www.amosnews.ro/wp-content/uploads/2023/06/Casa-de-Cultura-a-Studentilor-din-Sibiu.jpg"
+  },
+  {
+   "iso": "2026-11-04",
+   "data": "04.11.2026",
+   "autor": "Autor: Redactia AMOS News",
+   "titlu": "Cinci ansambluri folclorice, o singură scenă: ‘Joc și Tradiție’",
+   "subiect": "Joc și Tradiție",
+   "rezumat": "Anunță spectacolul „Joc și Tradiție” de vineri, 6 noiembrie 2026, de la Centrul Cultural „Ion Besoiu”, care reunește pe aceeași scenă cinci ansambluri folclorice, printre care Ansamblul Folcloric Studențesc „Ardealul”.",
+   "nume": "AMOS News",
+   "link": "https://www.amosnews.ro/cinci-ansambluri-folclorice-o-singura-scena-joc-si-traditie/",
+   "cale_img": null,
+   "varianta": "a",
+   "img_url": "https://www.amosnews.ro/wp-content/uploads/2026/11/Asociatia-Ansamblul-Folcloric-Studentesc-Ardealul-Facebook-1024x596.jpg"
+  },
+  {
    "iso": "2022-11-07",
    "data": "07.11.2022",
    "autor": "Autor: Calin Blaga",
