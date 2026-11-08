@@ -40,7 +40,7 @@
   document.body.appendChild(lb);
   var lbImg = lb.querySelector("img");
   var lbNr = lb.querySelector(".cilindru-lb__nr");
-  var lbList = [], lbK = 0, lbOrigine = null;
+  var lbList = [], lbK = 0, lbOrigine = null, lbDeschisLa = 0;
 
   function arata(i) {
     lbK = (i + lbList.length) % lbList.length;
@@ -51,6 +51,7 @@
   function deschide(list, i, origine) {
     lbList = list;
     lbOrigine = origine || null;
+    lbDeschisLa = Date.now();
     arata(i);
     lb.hidden = false;
     document.body.style.overflow = "hidden";
@@ -65,7 +66,9 @@
   lb.querySelector(".cilindru-lb__x").addEventListener("click", inchide);
   lb.querySelector(".cilindru-lb__p").addEventListener("click", function (e) { e.stopPropagation(); arata(lbK - 1); });
   lb.querySelector(".cilindru-lb__n").addEventListener("click", function (e) { e.stopPropagation(); arata(lbK + 1); });
-  lb.addEventListener("click", function (e) { if (e.target === lb) inchide(); });
+  // pe ecranele tactile, „click”-ul atingerii care a deschis fereastra ajunge pe fundalul ei:
+  // îl ignorăm, altfel fereastra s-ar închide imediat
+  lb.addEventListener("click", function (e) { if (e.target === lb && Date.now() - lbDeschisLa > 450) inchide(); });
   document.addEventListener("keydown", function (e) {
     if (lb.hidden) return;
     if (e.key === "Escape") inchide();
