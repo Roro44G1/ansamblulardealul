@@ -13,7 +13,9 @@
          …
        </ul>
      </div>
-   Peste 16 fotografii → 2 rânduri.
+   Rânduri: 1 până la 16 fotografii, apoi câte unul la fiecare 20 (minimum 2),
+   ca cilindrul să aibă tot ~20 de fețe pe rând; se poate impune cu data-randuri="N".
+   Viteza și tragerea se scalează cu numărul de fețe de pe un rând.
    ========================================================================= */
 (function () {
   "use strict";
@@ -81,7 +83,11 @@
       var img = a.querySelector("img");
       return { full: a.getAttribute("href"), alt: img ? img.alt : "" };
     });
-    var n = linkuri.length, rows = n > 16 ? 2 : 1, m = Math.ceil(n / rows);
+    var n = linkuri.length;
+    var rows = parseInt(root.getAttribute("data-randuri"), 10) ||
+      (n <= 16 ? 1 : Math.max(2, Math.ceil(n / 20)));
+    var m = Math.ceil(n / rows);
+    var scara = Math.min(1, 20 / m);   // la 20 de fețe pe rând: exact ca pe CCSS
 
     var F = linkuri.map(function (a, k) {
       var li = a.parentNode;
@@ -109,7 +115,7 @@
     setR();
     window.addEventListener("resize", setR);
 
-    var a = 0, v = reduce ? 0 : -0.12, paused = false, drag = null, moved = 0, vizibil = true, rulez = false;
+    var a = 0, v = reduce ? 0 : -0.12 * scara, paused = false, drag = null, moved = 0, vizibil = true, rulez = false;
 
     function deseneaza() {
       cyl.style.transform = "translateZ(" + (-r) + "px) rotateY(" + a + "deg)";
@@ -153,7 +159,7 @@
       if (!drag) return;
       var d = e.clientX - drag.x;
       moved = Math.max(moved, Math.abs(d));
-      a = drag.a0 + d * 0.25;
+      a = drag.a0 + d * 0.25 * scara;
     });
     root.addEventListener("pointerup", function (e) {
       if (!drag) return;
