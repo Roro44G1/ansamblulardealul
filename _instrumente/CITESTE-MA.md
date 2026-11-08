@@ -9,7 +9,7 @@ Pagina „Ardealul în presă” se actualizează direct din dosarul de presă C
 Același flux ca pe microbis.ro. Scriptul: `presa_din_ccss.py`.
 
 - `presa_fise.json` — sursa de adevăr: toate fișele din pagină. Fișele existente nu se rescriu.
-- Intră fișele cu subiectele din `SUBIECTE_PAGINA` (Ansamblul „Ardealul”, Festivalul „Tradiții”, Joc și Tradiție)
+- Intră fișele cu subiectele din `SUBIECTE_PAGINA` (Ansamblul „Ardealul”, Spectacolul folcloric „Tradiții” — în fișele vechi „Festivalul „Tradiții”” —, Joc și Tradiție)
   și fișele cu alt subiect care pomenesc Ardealul în context de spectacol, concert, premii, festival sau turnee
   (regula din 7.11.2026, funcția `in_context`). Mențiunile din listele de finanțare („Finanțări pentru proiecte”)
   nu intră; apar doar în raport, la „de verificat”.

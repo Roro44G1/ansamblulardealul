@@ -49,8 +49,10 @@ CALE_IMG = "assets/img/presa"
 FISE = AICI / "presa_fise.json"
 NOI = AICI / "presa_noi.json"
 
-SUBIECTE_PAGINA = {"Ansamblul „Ardealul”", "Festivalul „Tradiții”", "Joc și Tradiție"}
-CUVINTE_CHEIE = re.compile(r"ardealul|joc\s+si\s+traditie|festivalul\s+.?traditii")  # doar pentru „de verificat”
+SUBIECTE_PAGINA = {"Ansamblul „Ardealul”", "Festivalul „Tradiții”", "Spectacolul folcloric „Tradiții”", "Joc și Tradiție"}
+# Radu, 8.11.2026: „Tradiții” nu este festival, ci spectacol folcloric. Fișele din 2026 au subiectul
+# „Spectacolul folcloric „Tradiții””; „Festivalul „Tradiții”” rămâne doar pentru fișele din anii anteriori.
+CUVINTE_CHEIE = re.compile(r"ardealul|joc\s+si\s+traditie|festivalul\s+.?traditii|spectacolul\s+folcloric\s+.?traditii")  # doar pentru „de verificat”
 # Regula lui Radu (7.11.2026): fișele cu alt subiect intră și ele dacă pomenesc Ardealul în context
 # de spectacol, concert, premii, festival (inclusiv turnee). Mențiunile din listele de finanțare nu intră.
 MENTIUNE = re.compile(r"ardealul")
